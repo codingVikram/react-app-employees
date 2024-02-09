@@ -1,16 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Dictionary() {
   const [word, SetWord] = useState("");
-  const [word2, SetWord2] = useState("");
-
-  useEffect(() => {
-    console.log("State Updated " + word);
-  }, [word]);
-
-  useEffect(() => {
-    console.log("State Updated " + word2);
-  }, [word2]);
+  const navigate = useNavigate();
 
   // limit what state useEffect cares about --> dependency array
 
@@ -27,14 +20,13 @@ export default function Dictionary() {
           SetWord(e.target.value);
         }}
       />
-      <h2> Let's get the deifinition for {word} </h2>
-      <input
-        type="text"
-        onChange={(e) => {
-          SetWord2(e.target.value);
+      <button
+        onClick={() => {
+          navigate("/definition/" + word, { replace: true });
         }}
-      />
-      <h2> Let's get the deifinition for {word2} </h2>
+      >
+        Search
+      </button>
     </>
   );
 }
