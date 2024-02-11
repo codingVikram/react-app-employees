@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared";
 
 export default function Customers() {
   const [customers, setCustomers] = useState();
+  const url = baseUrl + "api/customers/";
   useEffect(() => {
-    console.log("Fetching...");
-    fetch("http://localhost:8000/api/customers/")
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setCustomers(data.customers);
       });
   }, []);
